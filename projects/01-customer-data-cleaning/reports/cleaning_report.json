@@ -1,0 +1,48 @@
+{
+  "input_records": 500,
+  "output_records": 500,
+  "high_confidence_duplicates": 50,
+  "possible_duplicates": 0,
+  "unique_records": 400,
+  "missing_values_before": {
+    "customer_id": 0,
+    "name": 0,
+    "email": 20,
+    "phone": 22,
+    "city": 0,
+    "address": 0,
+    "created_at": 0,
+    "staircase_type": 0,
+    "material": 0,
+    "budget_pln": 0
+  },
+  "missing_values_after": {
+    "customer_id": 0,
+    "name": 0,
+    "email": 20,
+    "phone": 22,
+    "city": 0,
+    "address": 0,
+    "created_at": 0,
+    "staircase_type": 0,
+    "material": 0,
+    "budget_pln": 0
+  },
+  "normalization_changes": {
+    "name": 164,
+    "email": 91,
+    "phone": 478,
+    "city": 43,
+    "address": 35,
+    "created_at": 59,
+    "staircase_type": 500,
+    "material": 170
+  },
+  "invalid_records": {
+    "count": 41,
+    "by_reason": {
+      "missing_email": 20,
+      "missing_phone": 22
+    }
+  }
+}
