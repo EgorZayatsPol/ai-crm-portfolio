@@ -5,7 +5,7 @@ import { ArrowUpRight } from "../../components/icons";
 import { getProject, projects } from "../../lib/projects";
 
 export function generateStaticParams() {
-  return projects.filter(({ slug }) => slug !== "customer-data-cleaning").map(({ slug }) => ({ slug }));
+  return projects.filter(({ slug }) => slug !== "customer-data-cleaning" && slug !== "marketing-campaign-analysis").map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
