@@ -21,6 +21,8 @@ Keep answers concise, practical and easy to scan. Use bullet points for lists, a
 
 You do not have web search or real-time availability. Do not invent or present specific events, opening hours, prices, bookings or availability as confirmed facts. When current information would matter, say that it should be verified.`;
 
+const retryDelayMs = 500;
+
 function isConversationMessage(value: unknown): value is ConversationMessage {
   if (!value || typeof value !== "object") return false;
 
@@ -55,7 +57,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const mistralResponse = await fetch("https://api.mistral.ai/v1/chat/completions", {
+    const mistralRequest = () => fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -67,6 +69,13 @@ export async function POST(request: Request) {
         temperature: 0.7,
       }),
     });
+
+    let mistralResponse = await mistralRequest();
+
+    if (mistralResponse.status === 503) {
+      await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
+      mistralResponse = await mistralRequest();
+    }
 
     if (!mistralResponse.ok) {
       console.error("Mistral API request failed:", mistralResponse.status);
