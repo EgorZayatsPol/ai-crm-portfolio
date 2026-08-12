@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "../../components/icons";
+import { CodeExamples, type CodeExample } from "../../components/how-it-works";
 
 export const metadata: Metadata = {
   title: "AI-assisted Document Processing — LU.AI",
@@ -32,6 +33,32 @@ const extractedFields = [
   ["Review status", "Check tax ID"],
 ];
 
+const codeExamples: CodeExample[] = [
+  { number: "01", title: "Extract document text", tool: "Python / PyMuPDF", source: "extract.py", summary: "Reads each PDF page and joins the extracted text into one string ready for downstream processing.", snippet: `import fitz
+
+document = fitz.open(pdf_path)
+text = "\n".join(page.get_text() for page in document)
+
+if not text.strip():
+    raise ValueError("No text extracted; OCR may be required.")` },
+  { number: "02", title: "Structure key fields", tool: "Python / regex", source: "structure.py", summary: "Maps values from extracted text into a predictable record shape that can be validated and stored consistently.", snippet: `invoice = {
+    "reference": find_value(text, r"Invoice\s+#?([A-Z0-9-]+)"),
+    "issue_date": find_value(text, r"Date:\s*(\d{4}-\d{2}-\d{2})"),
+    "amount": find_value(text, r"Total:\s*€?([\d,.]+)"),
+}
+
+invoice = {key: value.strip() if value else None for key, value in invoice.items()}` },
+  { number: "03", title: "Assist classification and review", tool: "Python / AI-assisted processing", source: "classify.py", summary: "Uses an AI-assisted classification step to suggest a document type and summary, then sends the result to human review before final use.", snippet: `analysis = classify_document(text)
+record = {
+    **invoice,
+    "document_type": analysis["document_type"],
+    "summary": analysis["summary"],
+    "review_required": True,
+}
+
+save_for_review(record)` },
+];
+
 export default function DocumentProcessingPage() {
   return <main className="min-h-screen overflow-hidden">
     <section className="hero-shell grid-lines px-5 pb-20 pt-6 sm:px-8 lg:px-12">
@@ -56,6 +83,8 @@ export default function DocumentProcessingPage() {
       <section className="grid gap-10 lg:grid-cols-[.72fr_1.28fr]"><div><p className="eyebrow">Document processing</p><h2 className="mt-5 text-3xl font-medium tracking-[-.05em] text-white sm:text-4xl">Extract the important parts<br /><span className="text-slate-400">without losing context.</span></h2><p className="mt-5 max-w-md leading-7 text-slate-400">The workflow combines PDF/text extraction and OCR concepts with a structured schema. Important values remain tied to the source document and uncertain values are kept visible for review.</p></div><div className="overflow-hidden rounded-xl border border-white/10 bg-[#0c1220]"><div className="border-b border-white/10 px-5 py-4"><p className="font-mono text-[10px] uppercase tracking-[.12em] text-cyan-300">EXTRACTED RECORD · ILLUSTRATIVE</p><p className="mt-2 text-sm text-slate-500">A simulated invoice transformed into structured fields.</p></div><dl className="grid sm:grid-cols-2">{extractedFields.map(([label, value]) => <div key={label} className="border-b border-white/[.06] px-5 py-4 sm:[&:nth-last-child(-n+2)]:border-b-0"><dt className="font-mono text-[10px] uppercase tracking-[.1em] text-slate-500">{label}</dt><dd className={`mt-2 text-sm ${label === "Review status" ? "text-amber-200" : "text-slate-200"}`}>{value}</dd></div>)}</dl><p className="border-t border-white/[.06] px-5 py-4 text-xs leading-5 text-slate-500">Illustrative document data only — no confidential content is processed or displayed.</p></div></section>
 
       <section className="grid gap-10 lg:grid-cols-2"><div><p className="eyebrow">Problem</p><h2 className="mt-4 text-3xl font-medium tracking-[-.05em] text-white sm:text-4xl">Documents hold data that systems cannot always use.</h2><p className="mt-5 leading-7 text-slate-400">Operational information frequently arrives in PDFs, scans and inconsistent document templates. Reading it manually is slow, while copying it into systems introduces repetitive work and makes validation harder.</p></div><div><p className="eyebrow">Results</p><h2 className="mt-4 text-3xl font-medium tracking-[-.05em] text-white sm:text-4xl">Structured outputs make follow-up work clearer.</h2><ul className="mt-5 space-y-4 text-sm leading-6 text-slate-400"><li><span className="mr-3 font-mono text-cyan-300">01</span>Document text is made searchable through extraction or OCR.</li><li><span className="mr-3 font-mono text-cyan-300">02</span>Key facts are organized into consistent, reusable fields.</li><li><span className="mr-3 font-mono text-cyan-300">03</span>Missing, uncertain or inconsistent content can be flagged for verification.</li><li><span className="mr-3 font-mono text-cyan-300">04</span>Reviewed information becomes easier to route into downstream analysis or operations.</li></ul></div></section>
+
+      <CodeExamples examples={codeExamples} />
 
       <section className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[.06] p-7 sm:p-10"><div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr]"><div><p className="eyebrow">How AI was used</p><h2 className="mt-5 text-3xl font-medium tracking-[-.05em] text-white sm:text-4xl">Assistance with structure,<br /><span className="text-slate-400">not blind extraction.</span></h2></div><div><p className="leading-7 text-slate-300">AI helped identify and structure relevant information from documents, assist with extracting and organizing unstructured text, classify or summarize extracted information, write and improve parts of the processing code, and suggest ways to handle inconsistent document content.</p><p className="mt-5 leading-7 text-slate-300">Extracted information and AI-generated results were reviewed by a human before being treated as final. The workflow is designed to surface useful candidates and context—not replace validation or approval.</p><div className="mt-7 flex flex-wrap gap-2">{["Field identification", "Text organization", "Classification", "Code assistance", "Human review"].map((item) => <span key={item} className="rounded-full border border-cyan-300/20 bg-[#080b12]/40 px-3 py-2 font-mono text-[10px] text-cyan-100">{item}</span>)}</div></div></div></section>
 
