@@ -16,7 +16,7 @@ export function ProjectSectionNavigation({ sections }: { sections: SectionLink[]
       const section = Array.from(document.querySelectorAll("section")).find((element) =>
         element.textContent?.includes(sectionTitle),
       );
-      if (section) section.id = id;
+      if (section && !section.id) section.id = id;
     });
   }, [sections]);
 
