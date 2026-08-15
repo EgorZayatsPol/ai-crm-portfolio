@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "../../components/icons";
 import { CodeExamples, type CodeExample } from "../../components/how-it-works";
+import { ProjectSectionNavigation } from "../../components/project-section-navigation";
 
 export const metadata: Metadata = {
   title: "AI-assisted Marketing Campaign Analysis — LU.AI",
@@ -63,6 +64,8 @@ export default function MarketingCampaignAnalysisPage() {
         <div className="project-art art-message mt-16 h-56 rounded-2xl sm:h-80"><span>CAMPAIGN / ANALYSIS 02</span><i /><i /><i /></div>
       </div>
     </section>
+
+    <ProjectSectionNavigation sections={[{ id: "overview", label: "Overview", sectionTitle: "Overview" }, { id: "workflow", label: "Workflow", sectionTitle: "Approach / workflow" }, { id: "data-analysis", label: "Data Analysis", sectionTitle: "Data analysis" }, { id: "results", label: "Results", sectionTitle: "Results / insights" }, { id: "code-examples", label: "Code Examples" }, { id: "how-ai-was-used", label: "How AI Was Used", sectionTitle: "How AI was used" }, { id: "conclusion", label: "Conclusion", sectionTitle: "Conclusion" }]} />
 
     <article className="px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-6xl space-y-28">
       <section className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow">Overview</p><h2 className="mt-5 text-4xl font-medium tracking-[-.055em] text-white sm:text-5xl">From campaign exports<br /><span className="text-slate-400">to clearer decisions.</span></h2></div><div className="max-w-2xl space-y-5 text-base leading-8 text-slate-300"><p>This illustrative case study models a workflow for examining campaign data across channels and objectives. It brings performance into one view so a marketing team can compare what is working, where efficiency is changing and which findings need closer review.</p><p>No external company data is used. The metrics shown on this page are realistic but illustrative examples designed to demonstrate how a repeatable analysis can support—not replace—marketing judgment.</p></div></section>

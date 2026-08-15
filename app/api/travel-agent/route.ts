@@ -21,6 +21,8 @@ For a city request, normally include: a short destination overview; recommended 
 
 Keep responses natural, concise and easy to scan. Use clear headings and bullet points. Include useful details such as neighbourhood, activity type and approximate price range when helpful. Answer general travel questions directly rather than defaulting to questions about budget or preferences.
 
+Use emojis naturally as visual markers for headings, categories and important recommendations, not in every sentence. For example: 📍 destination overview, 🏨 where to stay, 👀 places to see, 🎭 activities and entertainment, 🍽️ food, 🌆 evening, 💰 budget, 🚶 itinerary, ✈️ travel tips and 💡 useful tips. Keep the presentation clean, readable and professional, like a modern Telegram travel assistant.
+
 This is a portfolio demonstration, not a live booking service. Do not claim that events, prices, opening hours, bookings or availability are confirmed, and do not repeatedly add verification warnings unless the user specifically asks for current details.`;
 
 const retryDelayMs = 500;

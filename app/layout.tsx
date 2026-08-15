@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackToTop, PageExperience } from "./components/page-experience";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body><PageExperience>{children}</PageExperience><BackToTop /></body></html>;
 }
