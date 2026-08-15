@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "./components/icons";
+import { LanguageSwitcher, LocalizedText } from "./components/language-switcher";
 import { ProjectCard } from "./components/project-card";
 import { projects } from "./lib/projects";
 
@@ -28,13 +29,13 @@ export default function Home() {
             LU.<span className="text-cyan-300">AI</span>
           </Link>
           <div className="hidden items-center gap-7 text-sm text-slate-300 md:flex">
-            <a className="nav-link" href="#projects">Projects</a>
-            <a className="nav-link" href="#approach">Approach</a>
-            <a className="nav-link" href="#skills">Skills</a>
+            <a className="nav-link" href="#projects"><LocalizedText en="Projects" pl="Projekty" /></a>
+            <a className="nav-link" href="#approach"><LocalizedText en="Approach" pl="Podejście" /></a>
+            <a className="nav-link" href="#skills"><LocalizedText en="Skills" pl="Umiejętności" /></a>
           </div>
-          <a className="rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-slate-100 transition hover:border-cyan-300/60 hover:text-cyan-200" href="#contact">
-            Get in touch
-          </a>
+          <div className="flex items-center gap-3"><LanguageSwitcher /><a className="rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-slate-100 transition hover:border-cyan-300/60 hover:text-cyan-200" href="#contact">
+            <LocalizedText en="Get in touch" pl="Kontakt" />
+          </a></div>
         </nav>
 
         <div className="mx-auto flex min-h-[650px] max-w-6xl flex-col justify-center py-24 sm:py-32">
@@ -60,7 +61,7 @@ export default function Home() {
           <div className="section-heading">
             <p className="eyebrow">Selected projects</p>
             <h2>Applied AI work,<br /><span className="text-slate-400">built to solve real problems.</span></h2>
-            <p>Four focused case studies exploring data quality, language intelligence, document automation and agentic workflows.</p>
+            <p>Five focused case studies exploring data quality, sales intelligence, language workflows, document automation and agentic systems.</p>
           </div>
           <div className="mt-14 grid gap-4 md:grid-cols-2">
             {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}

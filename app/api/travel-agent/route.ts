@@ -5,6 +5,8 @@ type ConversationMessage = {
   content: string;
 };
 
+type Language = "en" | "pl";
+
 type MistralResponse = {
   choices?: Array<{
     message?: {
@@ -48,7 +50,7 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: { messages?: unknown };
+  let body: { messages?: unknown; language?: unknown };
 
   try {
     body = await request.json();
@@ -57,6 +59,7 @@ export async function POST(request: Request) {
   }
 
   const messages = body.messages;
+  const language: Language = body.language === "pl" ? "pl" : "en";
 
   if (!Array.isArray(messages) || !messages.every(isConversationMessage)) {
     return NextResponse.json({ error: "A valid conversation is required." }, { status: 400 });
@@ -71,7 +74,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         model: "mistral-small-latest",
-        messages: [{ role: "system", content: systemPrompt }, ...messages],
+        messages: [{ role: "system", content: `${systemPrompt}\n\nRespond in ${language === "pl" ? "Polish" : "English"}.` }, ...messages],
         temperature: 0.7,
       }),
     });

@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useLanguage } from "./language-switcher";
 
 const leaveDurationMs = 180;
 
@@ -62,6 +63,7 @@ export function PageExperience({ children }: { children: ReactNode }) {
 }
 
 export function BackToTop() {
+  const { copy } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -73,5 +75,5 @@ export function BackToTop() {
 
   if (!isVisible) return null;
 
-  return <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-5 right-5 z-40 rounded-full border border-cyan-300/25 bg-[#101827]/90 px-4 py-2 font-mono text-[10px] uppercase tracking-[.1em] text-cyan-100 shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:border-cyan-300/60 hover:bg-[#17212b] sm:bottom-7 sm:right-7" aria-label="Back to top">↑ Top</button>;
+  return <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-5 right-5 z-40 rounded-full border border-cyan-300/25 bg-[#101827]/90 px-4 py-2 font-mono text-[10px] uppercase tracking-[.1em] text-cyan-100 shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:border-cyan-300/60 hover:bg-[#17212b] sm:bottom-7 sm:right-7" aria-label={copy.backToTop}>{copy.backToTop}</button>;
 }

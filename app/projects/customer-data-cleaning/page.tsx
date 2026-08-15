@@ -4,6 +4,7 @@ import { CustomerDataExplorer } from "../../components/customer-data-explorer";
 import { HowItWorks } from "../../components/how-it-works";
 import { ArrowUpRight } from "../../components/icons";
 import { ProjectSectionNavigation } from "../../components/project-section-navigation";
+import { LanguageSwitcher, LocalizedText } from "../../components/language-switcher";
 
 export const metadata: Metadata = { title: "Customer Database Cleaning — LU.AI", description: "A Python data-cleaning and deduplication case study for a simulated manufacturer." };
 
@@ -15,10 +16,10 @@ const stages = [["01", "Raw CSV", "A deliberately inconsistent legacy export con
 export default function CustomerDataCleaningPage() {
   return <main className="min-h-screen overflow-hidden">
     <section className="hero-shell grid-lines px-5 pb-20 pt-6 sm:px-8 lg:px-12">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between" aria-label="Project navigation"><Link href="/" className="font-mono text-sm font-medium text-white">LU.<span className="text-cyan-300">AI</span></Link><Link href="/#projects" className="text-sm text-slate-300 transition hover:text-cyan-200">← Back to projects</Link></nav>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between" aria-label="Project navigation"><Link href="/" className="font-mono text-sm font-medium text-white">LU.<span className="text-cyan-300">AI</span></Link><div className="flex items-center gap-3"><Link href="/#projects" className="text-sm text-slate-300 transition hover:text-cyan-200">← <LocalizedText en="Back to projects" pl="Wróć do projektów" /></Link><LanguageSwitcher /></div></nav>
       <div className="mx-auto max-w-6xl pb-8 pt-24 sm:pt-32">
         <p className="eyebrow"><span className="status-dot" />Completed case study</p>
-        <h1 className="mt-7 max-w-4xl text-5xl font-medium tracking-[-.065em] text-white sm:text-7xl">Customer <span className="text-gradient">Database Cleaning</span></h1>
+        <h1 className="mt-7 max-w-4xl text-5xl font-medium tracking-[-.065em] text-white sm:text-7xl"><LocalizedText en="Customer " pl="Czyszczenie bazy danych " /><span className="text-gradient"><LocalizedText en="Database Cleaning" pl="klientów" /></span></h1>
         <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">Cleaning and deduplication of a legacy customer database using Python and AI-assisted development.</p>
         <div className="mt-9 flex flex-wrap gap-2">{["Python", "Pandas", "RapidFuzz", "Data Processing", "AI-assisted Development"].map((tag) => <span key={tag} className="tag">{tag}</span>)}</div>
         <a href="#explorer" className="button-primary mt-10">Explore the result <ArrowUpRight /></a>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLanguage } from "./language-switcher";
 
 type SectionLink = {
   id: string;
@@ -9,6 +10,7 @@ type SectionLink = {
 };
 
 export function ProjectSectionNavigation({ sections }: { sections: SectionLink[] }) {
+  const { copy, translate } = useLanguage();
   useEffect(() => {
     sections.forEach(({ id, sectionTitle }) => {
       if (document.getElementById(id) || !sectionTitle) return;
@@ -25,5 +27,5 @@ export function ProjectSectionNavigation({ sections }: { sections: SectionLink[]
     window.history.replaceState(null, "", `#${id}`);
   };
 
-  return <nav aria-label="On this page" className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12"><div className="flex gap-2 overflow-x-auto border-y border-white/10 py-3 [scrollbar-width:none]"><span className="shrink-0 py-1 pr-1 font-mono text-[10px] uppercase tracking-[.12em] text-slate-600">On this page</span>{sections.map((section) => <button key={section.id} type="button" onClick={() => scrollToSection(section.id)} className="shrink-0 rounded-full border border-white/10 px-3 py-1.5 text-xs text-slate-400 transition hover:border-cyan-300/40 hover:text-cyan-100">{section.label}</button>)}</div></nav>;
+  return <nav aria-label={copy.onThisPage} className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12"><div className="flex gap-2 overflow-x-auto border-y border-white/10 py-3 [scrollbar-width:none]"><span className="shrink-0 py-1 pr-1 font-mono text-[10px] uppercase tracking-[.12em] text-slate-600">{copy.onThisPage}</span>{sections.map((section) => <button key={section.id} type="button" onClick={() => scrollToSection(section.id)} className="shrink-0 rounded-full border border-white/10 px-3 py-1.5 text-xs text-slate-400 transition hover:border-cyan-300/40 hover:text-cyan-100">{translate(section.label)}</button>)}</div></nav>;
 }

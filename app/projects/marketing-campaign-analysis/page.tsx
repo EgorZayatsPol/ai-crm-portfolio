@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "../../components/icons";
 import { CodeExamples, type CodeExample } from "../../components/how-it-works";
 import { ProjectSectionNavigation } from "../../components/project-section-navigation";
+import { LanguageSwitcher, LocalizedText } from "../../components/language-switcher";
 
 export const metadata: Metadata = {
   title: "AI-assisted Marketing Campaign Analysis — LU.AI",
@@ -54,10 +55,10 @@ review_queue[["campaign", "cpa", "ctr", "spend"]]` },
 export default function MarketingCampaignAnalysisPage() {
   return <main className="min-h-screen overflow-hidden">
     <section className="hero-shell grid-lines px-5 pb-20 pt-6 sm:px-8 lg:px-12">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between" aria-label="Project navigation"><Link href="/" className="font-mono text-sm font-medium text-white">LU.<span className="text-cyan-300">AI</span></Link><Link href="/#projects" className="text-sm text-slate-300 transition hover:text-cyan-200">← Back to projects</Link></nav>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between" aria-label="Project navigation"><Link href="/" className="font-mono text-sm font-medium text-white">LU.<span className="text-cyan-300">AI</span></Link><div className="flex items-center gap-3"><Link href="/#projects" className="text-sm text-slate-300 transition hover:text-cyan-200">← <LocalizedText en="Back to projects" pl="Wróć do projektów" /></Link><LanguageSwitcher /></div></nav>
       <div className="mx-auto max-w-6xl pb-8 pt-24 sm:pt-32">
         <p className="eyebrow"><span className="status-dot" />Illustrative case study</p>
-        <h1 className="mt-7 max-w-5xl text-5xl font-medium tracking-[-.065em] text-white sm:text-7xl">Marketing Campaign <span className="text-gradient">Analysis</span></h1>
+        <h1 className="mt-7 max-w-5xl text-5xl font-medium tracking-[-.065em] text-white sm:text-7xl"><LocalizedText en="Marketing Campaign " pl="Analiza kampanii marketingowych " /><span className="text-gradient"><LocalizedText en="Analysis" pl="wspomagana przez AI" /></span></h1>
         <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">An AI-assisted workflow for analyzing marketing campaign data, identifying performance patterns, comparing campaigns and generating data-driven recommendations.</p>
         <div className="mt-9 flex flex-wrap gap-2">{["Python", "Data Analysis", "Marketing Analytics", "AI-assisted Analysis"].map((tag) => <span key={tag} className="tag">{tag}</span>)}</div>
         <a href="#analysis" className="button-primary mt-10">Explore the workflow <ArrowUpRight /></a>
